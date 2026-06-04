@@ -15,6 +15,25 @@ local TeleportService = game:GetService("TeleportService")
 local TweenService = game:GetService("TweenService")
 local GuiService = game:GetService("GuiService")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local StarterGui = game:GetService("StarterGui")
+
+local function sendSystemNotification(title, text, duration, icon, button1Text, button2Text, callbackFunction)
+	local success = false
+	while not success do
+		success = pcall(function()
+			StarterGui:SetCore("SendNotification", {
+				Title = title,
+				Text = text,
+				Duration = duration or 5,
+				Icon = icon or "rbxassetid://0", 
+				Button1 = button1Text,
+				Button2 = button2Text,
+				Callback = callbackFunction 
+			})
+		end)
+		task.wait(0.5)
+	end
+end
 
 repeat task.wait() until game:IsLoaded()
 
@@ -1010,3 +1029,10 @@ task.spawn(function()
         end
     end
 end)
+
+sendSystemNotification(
+	"System", 
+	"In Dev [v1.0.6]", 
+	7, 
+	"rbxassetid://6034287515" -- Replace with your own image ID if you want an icon
+)
