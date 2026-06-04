@@ -73,12 +73,11 @@ local Function = {
 
 local function IslandTableList()
     local Islands = {}
-    for _, v in pairs(workspace:WaitForChild("Map"):GetChildren()) do
+    for _, v in ipairs(workspace:WaitForChild("Map"):GetChildren()) do
         if v:IsA("Model") and (v.Name ~= "TeleportSpawn" or v.Name ~= "Fishmen" or v.Name ~= "SkyArea1" or v.Name ~= "SkyArea2") then
             table.insert(Islands, v.Name)
         end
     end
-
     return Islands
 end
 
@@ -721,7 +720,7 @@ local InterfaceManager = loadstring(game:HttpGetAsync("https://raw.githubusercon
 
 local Window = Library:CreateWindow{
     Title = "Anchor Hub -",
-    SubTitle = "Blox Fruits [ " .. executor .. " ]",
+    SubTitle = "Blox Fruits - [ " .. executor .. " ]",
     TabWidth = 160,
     Size = UDim2.fromOffset(520, 380),
     Resize = false,
