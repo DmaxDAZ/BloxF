@@ -6,6 +6,8 @@
 
 --------------------------------------------------------------------------------------------------------------------
 
+local executor = getgenv().identifyexecutor and (getgenv().identifyexecutor()) or game["Run Service"]:IsStudio() and (game["Run Service"]:IsServer() and "Server" or "Client").."StudioApp" or game["Run Service"]:IsServer() and "Server" or "Client"
+
 local RunService = game:GetService("RunService")
 local Lightning = game:GetService("Lighting")
 local VirtualInputManager = game:GetService("VirtualInputManager")
@@ -719,7 +721,7 @@ local InterfaceManager = loadstring(game:HttpGetAsync("https://raw.githubusercon
 
 local Window = Library:CreateWindow{
     Title = "Anchor Hub -",
-    SubTitle = "Blox Fruits [In Dev]",
+    SubTitle = "Blox Fruits [ " .. executor .. " ]",
     TabWidth = 160,
     Size = UDim2.fromOffset(520, 380),
     Resize = false,
@@ -860,7 +862,7 @@ IslandDrop:OnChanged(function(Value)
     Function["Travel"]["Selected"] = Value
 end)
 
-local AutoTravel = Tabs.Travel:CreateToggle("Auto Travel", {Title = "Enable Auto Travel", Default = true })
+local AutoTravel = Tabs.Travel:CreateToggle("Auto Travel", {Title = "Enable Auto Travel", Default = false })
 
 AutoTravel:OnChanged(function(Bool)
     Function["Travel"]["Traveling"] = Bool
