@@ -827,7 +827,7 @@ end)
 
 Tabs.Main:Section("Movement Settings")
 
-Tabs.Misc:CreateSlider("TweenSpeedSlider", {
+Tabs.Main:CreateSlider("TweenSpeedSlider", {
     Title = "Tween Speed",
     Default = 300,
     Min = 100,
