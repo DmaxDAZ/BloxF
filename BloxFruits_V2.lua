@@ -856,15 +856,15 @@ local IslandDrop = Tabs.Travel:CreateDropdown("IslandDrop", {
     Default = "None",
 })
 
-IslandDrop:OnChanged(function(Bool)
-    Function["Travel"]["Selected"] = Bool
-    if not Bool then Canceltween() end
+IslandDrop:OnChanged(function(Value)
+    Function["Travel"]["Selected"] = Value
 end)
 
 local AutoTravel = Tabs.Travel:CreateToggle("Auto Travel", {Title = "Enable Auto Travel", Default = true })
 
 AutoTravel:OnChanged(function(Bool)
     Function["Travel"]["Traveling"] = Bool
+    if not Bool then Canceltween() end
 end)
 
 task.spawn(function()
