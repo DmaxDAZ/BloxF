@@ -93,7 +93,7 @@ local Function = {
 local function IslandTableList()
     local Islands = {}
     for _, v in ipairs(workspace:WaitForChild("_WorldOrigin"):WaitForChild("Locations"):GetChildren()) do
-        if v:IsA("BasePart") and (v.Name ~= "Sea" or v.Name ~= "Skylands" or v.Name ~= "Underwater City" or v.Name ~= "Whirlpool") then
+        if v:IsA("Part") and (v.Name ~= "Sea" or v.Name ~= "Skylands" or v.Name ~= "Underwater City" or v.Name ~= "Whirlpool") then
             table.insert(Islands, v)
         end
     end
@@ -1034,7 +1034,7 @@ task.spawn(function()
                 local targetPosition = PlaceToTravel:IsA("Model") and (PlaceToTravel.PrimaryPart and PlaceToTravel.PrimaryPart.Position or PlaceToTravel:FindFirstChildOfClass("BasePart") and PlaceToTravel:FindFirstChildOfClass("BasePart").Position)
 
                 if not targetPosition and PlaceToTravel:IsA("BasePart") then
-                    targetPosition = PlaceToTravel.Position
+                    targetPosition = PlaceToTravel.Position + Vector3.new(0, 50, 0)
                 end
 
                 if targetPosition then
@@ -1049,7 +1049,7 @@ end)
 
 sendSystemNotification(
 	"System", 
-	"In Dev [v1.1.0]", 
+	"In Dev [v1.1.1]", 
 	7, 
 	"rbxassetid://6034287515"
 )
