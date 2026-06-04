@@ -75,7 +75,7 @@ local function IslandTableList()
     local Islands = {}
     for _, v in ipairs(workspace:WaitForChild("Map"):GetChildren()) do
         if v:IsA("Model") and (v.Name ~= "TeleportSpawn" or v.Name ~= "Fishmen" or v.Name ~= "SkyArea1" or v.Name ~= "SkyArea2") then
-            table.insert(Islands, v.Name)
+            table.insert(Islands, v)
         end
     end
     return Islands
