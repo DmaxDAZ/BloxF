@@ -871,7 +871,13 @@ Tabs.Travel:Section("Island Travel")
 
 local IslandDrop = Tabs.Travel:CreateDropdown("IslandDrop", {
     Title = "Select Island",
-    Values = "None", IslandTableList(),
+    Values = (function()
+        local list = {"None"}
+        for _, name in ipairs(IslandTableList()) do
+            table.insert(list, name)
+        end
+        return list
+    end)(),
     Multi = false,
     Default = "None",
 })
@@ -1020,19 +1026,30 @@ end)
 task.spawn(function()
     while task.wait() do
         if Function["Travel"]["Traveling"] then
-            if not Function["Travel"]["Selected"] then return end
+            if not Function["Travel"]["Selected"] or Function["Travel"]["Selected"] == "None" then continue end
 
             local PlaceToTravel = workspace:WaitForChild("Map"):FindFirstChild(tostring(Function["Travel"]["Selected"]))
-            if not PlaceToTravel then return end
+            
+            if PlaceToTravel then
+                local targetPosition = PlaceToTravel:IsA("Model") and (PlaceToTravel.PrimaryPart and PlaceToTravel.PrimaryPart.Position or PlaceToTravel:FindFirstChildOfClass("BasePart") and PlaceToTravel:FindFirstChildOfClass("BasePart").Position)
 
-            Tween(HumanoidRootPart, PlaceToTravel.WorldPosition, Function["Settings"]["Tween Speed"])
+                if not targetPosition and PlaceToTravel:IsA("BasePart") then
+                    targetPosition = PlaceToTravel.Position
+                end
+
+                if targetPosition then
+                    Tween(HumanoidRootPart, targetPosition, Function["Settings"]["Tween Speed"])
+                else
+                    warn("Could not find a valid part to tween to inside: " .. PlaceToTravel.Name)
+                end
+            end
         end
     end
 end)
 
 sendSystemNotification(
 	"System", 
-	"In Dev [v1.0.6]", 
+	"In Dev [v1.0.9]", 
 	7, 
-	"rbxassetid://6034287515" -- Replace with your own image ID if you want an icon
+	"rbxassetid://6034287515"
 )
