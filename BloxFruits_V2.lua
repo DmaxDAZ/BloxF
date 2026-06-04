@@ -92,8 +92,8 @@ local Function = {
 
 local function IslandTableList()
     local Islands = {}
-    for _, v in ipairs(workspace:WaitForChild("Map"):GetChildren()) do
-        if v:IsA("Model") and (v.Name ~= "TeleportSpawn" or v.Name ~= "Fishmen" or v.Name ~= "SkyArea1" or v.Name ~= "SkyArea2") then
+    for _, v in ipairs(workspace:WaitForChild("_WorldOrigin"):WaitForChild("Locations"):GetChildren()) do
+        if v:IsA("BasePart") and (v.Name ~= "Sea" or v.Name ~= "Skylands" or v.Name ~= "Underwater City" or v.Name ~= "Whirlpool") then
             table.insert(Islands, v)
         end
     end
@@ -1028,7 +1028,7 @@ task.spawn(function()
         if Function["Travel"]["Traveling"] then
             if not Function["Travel"]["Selected"] or Function["Travel"]["Selected"] == "None" then continue end
 
-            local PlaceToTravel = workspace:WaitForChild("Map"):FindFirstChild(tostring(Function["Travel"]["Selected"]))
+            local PlaceToTravel = workspace:WaitForChild("_WorldOrigin"):WaitForChild("Locations"):FindFirstChild(tostring(Function["Travel"]["Selected"]))
             
             if PlaceToTravel then
                 local targetPosition = PlaceToTravel:IsA("Model") and (PlaceToTravel.PrimaryPart and PlaceToTravel.PrimaryPart.Position or PlaceToTravel:FindFirstChildOfClass("BasePart") and PlaceToTravel:FindFirstChildOfClass("BasePart").Position)
@@ -1049,7 +1049,7 @@ end)
 
 sendSystemNotification(
 	"System", 
-	"In Dev [v1.0.9]", 
+	"In Dev [v1.1.0]", 
 	7, 
 	"rbxassetid://6034287515"
 )
